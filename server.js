@@ -1,12 +1,21 @@
 const express = require("express");
+const path = require("path");
 
 const app = express(); 
 
 const port = 3000;
 
+console.log("restarting")
+
+app.use(express.static(path.join(__dirname, './static')));
+
 app.get("/", (req, res) => {
-    res.send("siemaneczko :) ")
-} )
+    res.sendFile(path.join(__dirname,  "./static/index.html"))
+} ); 
+
+app.get("/speakers", (req, res) => {
+    res.sendFile(path.join(__dirname,  "./static/speakers.html"))
+} );
 
 app.listen(port, () => {
     console.log(`express server is listening on port ${port}`); 
